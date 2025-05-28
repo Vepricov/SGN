@@ -1,0 +1,16 @@
+epochs: 3
+batch_size: 32
+learning_rate: 0.01
+hidden_size: 64
+data_size: 1000
+input_dim: 10
+output_dim: 1
+save_dir: results
+analyze_every: 1
+dataset: synthetic
+model: simple
+run_name: synthetic_simple_example
+optimizer: sgd
+weight_decay: 0.0
+momentum: 0.9
+scheduler: False

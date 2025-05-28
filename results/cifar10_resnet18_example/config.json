@@ -1,0 +1,20 @@
+{
+    "epochs": 10,
+    "max_steps": null,
+    "batch_size": 128,
+    "learning_rate": 0.01,
+    "hidden_size": 64,
+    "data_size": 1000,
+    "input_dim": 10,
+    "output_dim": 1,
+    "save_dir": "results",
+    "analyze_every": 20,
+    "dataset": "cifar10",
+    "model": "resnet18",
+    "run_name": "cifar10_resnet18_example",
+    "optimizer": "sgd",
+    "weight_decay": 0.0005,
+    "momentum": 0.9,
+    "scheduler": true,
+    "analysis_batch_size": 100
+}
