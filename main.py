@@ -213,22 +213,29 @@ def main():
     
     # Display run information
     print("\nRunning experiment with the following parameters:")
-    print(f"  Epochs:                {args.epochs}")
-    print(f"  Batch size:            {args.batch_size}")
-    print(f"  Learning rate:         {args.learning_rate}")
-    print(f"  Hidden layer size:     {args.hidden_size}")
     print(f"  Dataset:               {args.dataset}")
     print(f"  Model:                 {args.model}")
     print(f"  Optimizer:             {args.optimizer}")
+    print(f"  Epochs:                {args.epochs}")
+    print(f"  Batch size:            {args.batch_size}")
+    print(f"  Learning rate:         {args.learning_rate}")
     print(f"  Weight decay:          {args.weight_decay}")
+    print(f"  Momentum:              {args.momentum}")
+    print(f"  Scheduler:             {args.scheduler}")
     print(f"  Save directory:        {full_save_dir}")
     print(f"  Analyze every:         {args.analyze_every} steps")
+    print(f"  Analysis batch size:   {args.analysis_batch_size}")
     print(f"  Run name:              {args.run_name}")
     print()
     
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
+    if torch.cuda.is_available():
+        print("~~~~~~~~~~~ GPU ~~~~~~~~~~~")
+        for i in range(torch.cuda.device_count()):
+            print(torch.cuda.get_device_name(i))
+    else:
+        print("~~~~~~~~~~~ CPU ~~~~~~~~~~~")
     
     # Load dataset
     if args.dataset == 'synthetic':

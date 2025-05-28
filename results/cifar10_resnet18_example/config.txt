@@ -7,7 +7,7 @@ data_size: 1000
 input_dim: 10
 output_dim: 1
 save_dir: results
-analyze_every: 20
+analyze_every: 10
 dataset: cifar10
 model: resnet18
 run_name: cifar10_resnet18_example

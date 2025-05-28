@@ -43,6 +43,9 @@ class LossAnalyzer:
                 for i in range(len(inputs)):
                     loss = criterion(outputs[i:i+1], targets[i:i+1])
                     all_losses.append(loss.item())
+                
+                if len(all_losses) > self.analysis_batch_size:
+                    break
         
         return np.array(all_losses)
     
@@ -132,8 +135,8 @@ class LossAnalyzer:
         plt.subplot(2, 1, 1)
         plt.plot(stats_df['global_step'], stats_df['mean'], 'b-', label='Mean')
         plt.plot(stats_df['global_step'], stats_df['median'], 'r--', label='Median')
-        plt.plot(stats_df['global_step'], stats_df['min'], 'g-.', label='Min')
-        plt.plot(stats_df['global_step'], stats_df['max'], 'm:', label='Max')
+        #plt.plot(stats_df['global_step'], stats_df['min'], 'g-.', label='Min')
+        #plt.plot(stats_df['global_step'], stats_df['max'], 'm:', label='Max')
         plt.xlabel('Global Step')
         plt.ylabel('Loss Value')
         plt.title('Evolution of Loss Statistics')
@@ -178,18 +181,5 @@ class LossAnalyzer:
             'min': 'min',
             'max': 'max'
         }).reset_index()
-        
-        plt.figure(figsize=(12, 8))
-        plt.plot(epoch_stats['epoch'] + 1, epoch_stats['mean'], 'b-', label='Mean')
-        plt.plot(epoch_stats['epoch'] + 1, epoch_stats['median'], 'r--', label='Median')
-        plt.plot(epoch_stats['epoch'] + 1, epoch_stats['min'], 'g-.', label='Min')
-        plt.plot(epoch_stats['epoch'] + 1, epoch_stats['max'], 'm:', label='Max')
-        plt.xlabel('Epoch')
-        plt.ylabel('Loss Value')
-        plt.title('Loss Statistics by Epoch')
-        plt.legend()
-        plt.grid(True, alpha=0.3)
-        plt.savefig(os.path.join(self.save_dir, 'loss_by_epoch.png'))
-        plt.close()
         
         print(f"Final report generated and saved to {self.save_dir}")
